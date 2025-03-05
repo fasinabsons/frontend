@@ -1,0 +1,30 @@
+<!--Approval Html-->
+<div class="approval-container" [ngClass]="{'dark-mode': isDarkMode}">
+  <!-- Search and Date Selector -->
+  <div class="filters">
+    <div class="date-selector">
+      <label for="selectedDate">Select Date:</label>
+      <input
+        type="date"
+        id="selectedDate"
+        [(ngModel)]="selectedDate"
+        (change)="onDateChange()"
+      />
+    </div>
+  </div>
+
+  <!-- Approval Logs Section (Always Visible) -->
+  <div class="logs-section" [ngClass]="{'dark-mode': isDarkMode}">
+    <h3>Approval Logs</h3>
+    <div *ngIf="isLoading" class="loading-indicator">Loading...</div>
+    <ul class="logs-list" *ngIf="approvalLogs.length > 0">
+      <li *ngFor="let log of approvalLogs">
+        <span class="timestamp">{{ log.timestamp | date:'medium' }}</span>
+        <span class="message">{{ log.message }}</span>
+      </li>
+    </ul>
+    <div *ngIf="!isLoading && approvalLogs.length === 0" class="no-logs">
+      No approval logs available.
+    </div>
+  </div>
+</div>

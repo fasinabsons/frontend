@@ -1,0 +1,177 @@
+/* 🌞 Global Light Mode Styles */
+body.light-theme {
+  background-color: #ffffff; /* Bright white */
+  color: #333333; /* Dark text */
+  font-family: 'Poppins', sans-serif;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ⚡ Headers and Footers */
+.light-theme .header,
+.light-theme .footer {
+  background: #f8f9fa; /* Light grey */
+}
+
+/* 📦 Card and Content Styling */
+.light-theme .content,
+.light-theme .card {
+  background: #ffffff;
+  color: #333333;
+  border-radius: 8px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* 🔷 Buttons */
+.light-theme .btn {
+  background: linear-gradient(45deg, #007bff, #00c6ff);
+  color: white;
+  border: none;
+  transition: 0.3s ease-in-out;
+}
+
+.light-theme .btn:hover {
+  box-shadow: 0px 0px 10px rgba(0, 198, 255, 0.6);
+}
+
+/* 🌞 Light Mode for Graph Containers */
+.light-theme .graph-container {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.light-theme .chart-panel {
+  background-color: #ffffff;
+  color: #333333;
+}
+
+/* 🎨 Chart Adjustments */
+canvas {
+  width: 70%;
+  height: 200px;
+}
+
+
+/* 🌙 Global Dark Mode Styles */
+body.dark-mode {
+  background-color: #0d0d0d; /* Deep black */
+  color: #e0e0e0; /* Soft white */
+  font-family: 'Poppins', sans-serif;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ⚡ Headers and Footers */
+.dark-mode .header,
+.dark-mode .footer {
+  background: #000000;
+}
+
+/* 📦 Card and Content Styling */
+.dark-mode .content,
+.dark-mode .card {
+  background: #121212;
+  color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.05);
+}
+
+/* 🔷 Buttons (Neon Effect) */
+.dark-mode .btn {
+  background: linear-gradient(45deg, #4a00e0, #8e2de2);
+  color: white;
+  border: none;
+  transition: 0.3s ease-in-out;
+}
+
+.dark-mode .btn:hover {
+  box-shadow: 0px 0px 10px rgba(142, 45, 226, 0.6);
+}
+
+/* 🎛️ Input Fields */
+.dark-mode input,
+.dark-mode textarea,
+.dark-mode select {
+  background: #202020;
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.dark-mode input:focus {
+  border-color: #8e2de2;
+  box-shadow: 0 0 5px rgba(142, 45, 226, 0.5);
+}
+
+/* 📊 Graph Containers */
+.dark-mode .graph-container {
+  background: #121212;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.dark-mode .graph-container canvas {
+  background: transparent;
+}
+
+/* 🌙 Dark Mode for Graph Containers */
+.dark-mode .chart-panel {
+  background-color: #181818;
+  color: #ffffff;
+
+}
+
+/* 🌙 Dark Mode Tooltips */
+.dark-mode .chartjs-tooltip {
+  background: #1e1e1e; // Dark tooltip background
+  color: #e0e0e0; // Light text color
+}
+
+/* 🎨 Chart Size Adjustments */
+canvas {
+  width: 70%; /* 🔹 Change to 80% if charts are still big */
+  filter: brightness(0.8); // Reduce brightness for better contrast in dark mode
+  height: 200px; /* 🔹 Reduce height further if needed */
+}
+  /* Grid Lines */
+  .chartjs-grid {
+    stroke: rgba(255, 255, 255, 0.1); // Subtle grid lines in dark mode
+  }
+/* 🌟 Tables */
+.dark-mode table {
+  background: #000000;
+  border-collapse: collapse;
+}
+
+
+.dark-mode th {
+  background: #252525;
+  color: #ffffff;
+}
+
+/* 🖱️ Hover Effects */
+.dark-mode a {
+  color: #8e2de2;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.dark-mode a:hover {
+  color: #4a00e0;
+}
+
+/* 🎮 Loading and Animations */
+.dark-mode .loading {
+  background: url('/assets/spinner-dark.gif') no-repeat center center;
+}
+
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 5px rgba(142, 45, 226, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(142, 45, 226, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(142, 45, 226, 0.5);
+  }
+}

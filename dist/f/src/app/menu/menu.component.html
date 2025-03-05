@@ -1,0 +1,10 @@
+<nav class="menu" [class.collapsed]="isCollapsed">
+  <ul>
+    <li *ngFor="let item of menuItems">
+      <a [routerLink]="[item.route]" (click)="navigateAndCollapse()">
+        <i class="fa {{ item.icon }}"></i> {{ item.label }}
+      </a>
+    </li>
+  </ul>
+  <button class="toggle-btn" (click)="toggleMenu()">☰</button>
+</nav>

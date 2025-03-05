@@ -1,0 +1,123 @@
+<!-- Entry Count Display -->
+<span *ngIf="totalEntries >= 0" class="entry-count">({{ totalEntries }} entries)</span>
+
+<!-- Main Container -->
+<div class="item-list-container">
+  <!-- Search Section -->
+  <div class="search-container">
+    <label for="searchField">Search Field:</label>
+    <select [(ngModel)]="searchField" id="searchField" name="searchField">
+      <option value="" *ngIf="!searchField" disabled>Select Field</option>
+      <option *ngFor="let field of availableFields" [value]="field">{{ field }}</option>
+    </select>
+
+    <label for="searchQuery">Search Query:</label>
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      placeholder="Enter search query"
+      id="searchQuery"
+      name="searchQuery"
+    />
+  </div>
+
+  <!-- Primary Key Selection -->
+  <div class="primary-key-selection">
+    <label for="selectedPrimaryKey">Select Primary Key for Excel:</label>
+    <select [(ngModel)]="selectedPrimaryKey" id="selectedPrimaryKey">
+      <option *ngFor="let field of availableFields" [value]="field">
+        {{ field }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Pagination Section -->
+  <div class="pagination">
+    <button (click)="changePage('prev')" [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="changePage('next')" [disabled]="currentPage === totalPages">Next</button>
+  </div>
+
+  <!-- Save Excel Section -->
+  <div class="save-excel-section">
+    <button (click)="addEntryToExcel()"> Add</button>
+    <button (click)="removeEntryFromExcel()"> Remove</button>
+    <button (click)="saveAsExcel()"> Save</button>
+  </div>
+    <p>In Excel: {{excelData.length}}</p>
+    <p>Removed From Excel: {{removedCount}}</p>
+
+  <!-- Table Section -->
+  <div *ngIf="filteredData.length > 0">
+    <table class="item-table">
+      <thead>
+        <tr>
+          <th>
+            <label for="selectAll">Select All</label>
+            <input id="selectAll" type="checkbox" (change)="toggleAllCheckboxes($event)" />
+          </th>
+          <th *ngFor="let field of availableFields">{{ field }}</th>
+          <th *ngFor="let parent of getParentKeys()">{{ parent }}</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of paginatedData">
+          <td><input type="checkbox" [(ngModel)]="item.selected" /></td>
+          <td *ngFor="let field of availableFields">{{ item[field] || '—' }}</td>
+          <td *ngFor="let parent of getParentKeys()">
+            <div *ngFor="let child of nestedData[parent]">
+              {{ getNestedValue(item, parent, child) }}
+            </div>
+          </td>
+          <td><button (click)="viewDetails(item)">Details</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<!-- Details Modal -->
+<div *ngIf="showDetails" class="details-modal">
+<div class="details-container">
+<button class="close-button" (click)="closeDetails()">×</button>
+<h2 class="primary-key">
+{{ selectedPrimaryKey }}: {{ selectedEntryDetails[selectedPrimaryKey] || 'N/A' }}
+</h2>
+<div class="save-buttons">
+<button (click)="saveAsCSV()">Save as CSV</button>
+</div>
+<div class="details-content">
+<table class="details-table">
+<thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr *ngFor="let entry of selectedEntryDetails.nestedEntries">
+<td>{{ entry.key }}</td>
+<td>
+<ng-container *ngIf="entry.isExpandable; else showValue">
+<button class="expand-button" (click)="toggleExpand(entry.key)">
+{{ expandedState[entry.key] ? '⬆️ (Collapse)' : '⬇️ (Click to Expand)' }}
+</button>
+<div *ngIf="expandedState[entry.key]" class="nested-data">
+<table class="nested-table">
+<tr *ngFor="let subEntry of getSubEntries(entry.key)">
+<td>{{ subEntry.key }}</td>
+<td>{{ subEntry.value }}</td>
+</tr>
+</table>
+</div>
+</ng-container>
+<ng-template #showValue>
+{{ entry.value }}
+</ng-template>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>

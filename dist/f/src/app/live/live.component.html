@@ -1,0 +1,37 @@
+ <!--Live Html-->
+ <div class="live-logs-container"[class.dark-mode]="isDarkMode">
+      <h2>Live Logs</h2>
+      <div class="filters">
+          <input type="text" [(ngModel)]="searchQuery" (input)="filterUserSuggestions()" placeholder="Search User">
+          <div class="suggestions" *ngIf="userSuggestions.length">
+              <div *ngFor="let user of userSuggestions" (click)="selectUser(user)">
+                  {{ user }}
+              </div>
+          </div>
+          <label for="dateInput">Select Date:</label>
+          <input id="dateInput" type="date" [(ngModel)]="selectedDate" (change)="onDateChange()" />
+      </div>
+
+      <!-- ✅ Logs Section -->
+      <ng-container *ngFor="let logGroup of [
+        {title: 'Sales Order Logs For the Day', logs: salesOrderLogs},
+        {title: 'Estimation Logs For the Day', logs: estimationLogs},
+        {title: 'Purchase Order Logs For the Day', logs: purchaseOrderLogs},
+        {title: 'Delivery Order Logs For the Day', logs: deliveryOrderLogs},
+        {title: 'GRN Logs For the Day', logs: grnLogs},
+        {title: 'Sales Invoice Logs For the Day', logs: salesInvoicesLogs}
+      ]">
+          <h5 *ngIf="logGroup.logs.length > 0">{{ logGroup.title }}</h5>
+          <ul class="logs-list" *ngIf="logGroup.logs.length > 0">
+              <li *ngFor="let log of logGroup.logs">
+                  <span class="timestamp">{{ log.timestamp }}</span>
+                  <span class="message">{{ log.message }}</span>
+              </li>
+          </ul>
+      </ng-container>
+
+      <p *ngIf="salesOrderLogs.length === 0 && estimationLogs.length === 0 && purchaseOrderLogs.length === 0 && deliveryOrderLogs.length === 0 && grnLogs.length === 0 && salesInvoicesLogs.length === 0">
+          No logs available.
+      </p>
+  </div>
+

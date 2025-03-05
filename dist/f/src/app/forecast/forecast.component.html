@@ -1,0 +1,43 @@
+<div class="forecast-container">
+  <!-- Controls - Only show in "all" mode -->
+  <div class="controls" *ngIf="chartType === 'all'">
+    <div class="view-selector">
+      <button [class.active]="selectedView === 'month'" (click)="onViewChange('month')">Monthly</button>
+      <button [class.active]="selectedView === 'quarter'" (click)="onViewChange('quarter')">Quarterly</button>
+      <button [class.active]="selectedView === 'year'" (click)="onViewChange('year')">Yearly</button>
+    </div>
+  </div>
+
+  <!-- Bar Charts Row -->
+  <div class="chart-row">
+    <div class="chart-container" *ngIf="chartType === 'sales' || chartType === 'all'">
+      <h3>Sales Revenue</h3>
+      <canvas #salesChart></canvas>
+    </div>
+
+    <div class="chart-container" *ngIf="chartType === 'purchase' || chartType === 'all'">
+      <h3>Purchase Orders</h3>
+      <canvas #purchaseChart></canvas>
+    </div>
+  </div>
+
+  <!-- Pie Charts Row -->
+  <div class="chart-row">
+    <div class="chart-container" *ngIf="chartType === 'revenue' || chartType === 'all'">
+      <h3>Revenue by User</h3>
+      <canvas #revenuePieChart></canvas>
+    </div>
+
+    <div class="chart-container" *ngIf="chartType === 'conversions' || chartType === 'all'">
+      <h3>Conversions by User</h3>
+      <canvas #conversionPieChart></canvas>
+    </div>
+  </div>
+  <!-- Line Charts Row -->
+  <div class="chart-row">
+    <div class="chart-container" *ngIf="chartType === 'salesPurchaseChart' || chartType === 'all'">
+      <h3>Sales vs Purchase</h3>
+      <canvas #salesPurchaseChart></canvas>
+    </div>
+
+</div>

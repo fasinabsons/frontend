@@ -1,0 +1,31 @@
+.app-container {
+  display: flex;
+  flex-direction:row;
+  height: 100vh;
+}
+
+.menu-container {
+  height: 60px; /* adjust to your menu height */
+  background-color: #f0f0f0; /* adjust to your menu background color */
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+
+.main-content {
+  flex-grow: 1;
+}
+
+body.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+/* Optional: Dark mode styles for specific elements */
+.dark-mode .footer {
+  background: #1e1e1e;
+}

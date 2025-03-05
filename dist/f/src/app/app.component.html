@@ -1,0 +1,112 @@
+<router-outlet></router-outlet>
+<!-- Main Container -->
+<div class="container">
+  <!-- Sticky Buttons -->
+  <div class="sticky-buttons">
+    <!-- Fetch Data Button -->
+    <button
+      *ngIf="showFetchButton"
+      (click)="fetchData()"
+      [disabled]="!collectionName"
+      class="btn btn-primary"
+    >
+      Fetch Data
+    </button>
+    <!-- Filter Data Button -->
+    <button
+      *ngIf="showFilterAndUpdateButtons"
+      (click)="filterData()"
+      class="btn btn-warning"
+    >
+      Filter Data
+    </button>
+    <!-- Update Backend Button -->
+    <button
+      *ngIf="showFilterAndUpdateButtons"
+      (click)="updateBackend()"
+      class="btn btn-info"
+    >
+      Update Backend
+    </button>
+  </div>
+  <!-- Collection Name Input Section -->
+  <div class="input-section">
+    <label for="collectionName">Collection Name</label>
+    <input
+      id="collectionName"
+      [(ngModel)]="collectionName"
+      type="text"
+      placeholder="Enter collection name"
+      class="input-field"
+    />
+  </div>
+
+  <!-- Saved Logs Section -->
+<!--<div *ngIf="!fetchComplete">
+  <app-logs (refreshLogs)="fetchSavedLogs()"></app-logs>
+</div>-->
+
+  <!-- Filter Options Section -->
+<!-- ✅ Document Fields Section -->
+<div class="filter-section" *ngIf="showFilterOptions && availableFields.length > 0">
+  <h3>Document Fields</h3>
+
+  <!-- ✅ Select All / Clear All Buttons -->
+  <div class="filter-buttons">
+    <button (click)="selectAllFields()">Select All</button>
+    <button (click)="clearAllFields()">Clear All</button>
+  </div>
+
+  <div class="checkbox-list">
+    <label *ngFor="let field of availableFields">
+      <input
+        type="checkbox"
+        [checked]="selectedFields.includes(field)"
+        (change)="toggleFieldSelection(field, $event)"
+      />
+      {{ field }}
+    </label>
+  </div>
+
+<!-- Nested Fields Section -->
+<div class="nested-filter-section" *ngIf="nestedData && getParentKeys().length > 0">
+  <h3>Nested Fields</h3>
+  <div *ngFor="let parentDocument of getParentKeys()">
+    <div class="parent-document">
+      <!--<h3>{{ parentDocument }}</h3>-->
+      <div class="filter-buttons">
+        <button (click)="selectAllFields(parentDocument)">Select All</button>
+        <button (click)="clearAllFields(parentDocument)">Clear All</button>
+      </div>
+      <div class="nested-subfields-dropdown">
+        <button class="dropdown-button" (click)="toggleDropdown(parentDocument)">{{ parentDocument }} <i class="fa fa-caret-down"></i></button>
+        <div class="nested-subfields" [ngClass]="{'show': dropdowns[parentDocument]}">
+          <label class="subfield-label">Select Subfields:</label>
+          <div class="checkbox-group">
+            <div *ngFor="let subField of nestedData[parentDocument]">
+              <input
+                id="{{ subField }}"
+                type="checkbox"
+                [checked]="nestedSelectedFields[parentDocument] && nestedSelectedFields[parentDocument].includes(subField)"
+                (change)="toggleFieldSelection(subField, $event, parentDocument)"
+              />
+              <label for="{{ subField }}">{{ subField }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Filtered Data Section -->
+<div class="data-section" *ngIf="filteredData.length > 0">
+  <h3>Filtered Data</h3>
+  <app-item-list
+    [data]="filteredData"></app-item-list>
+</div>
+
+<!-- ✅ Footer -->
+<app-footer></app-footer>
+  </div>
+
+</div>

@@ -1,0 +1,144 @@
+<!-- logs.component.html -->
+<div class="logs-container" [ngClass]="{'dark-mode': isDarkMode}">
+
+  <!-- Main Components Grid -->
+  <div class="grid-container">
+    <!-- Delivery Orders Section -->
+    <div class="section-card delivery-orders" (click)="toggleSection('deliveryorders')">
+      <div class="card-header">
+        <h3>📈 Delivery Orders (Total: {{ (metricsabsons.deliveryorders.total / 1_000_000) | number:'1.0-2' }} M)</h3>
+      </div>
+      <div class="card-content" *ngIf="isExpanded['deliveryorders']">
+        <div class="status-container">
+          <div class="status open">Open: {{ metricsabsons.deliveryorders.open }}</div>
+          <div class="status closed">Closed: {{ metricsabsons.deliveryorders.closed }}</div>
+          <div class="status cancelled">Cancelled: {{ metricsabsons.deliveryorders.cancelled }}</div>
+        </div>
+        <ul>
+          <li *ngFor="let ranking of metricsabsons.deliveryorders.rankings">
+            {{ ranking.user }}: {{ ranking.value | number:'1.0-2' }} ({{ ranking.percentage }}%)
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Sales Orders Section -->
+    <div class="section-card sales-orders" (click)="toggleSection('salesorders')">
+      <div class="card-header">
+        <h3>💼 Sales Orders (Total: {{ (metricsabsons.salesorders.total / 1_000_000) | number:'1.0-2' }}M)</h3>
+      </div>
+      <div class="card-content" *ngIf="isExpanded['salesorders']">
+        <div class="status-container">
+          <div class="status open">Open: {{ metricsabsons.salesorders.open }}</div>
+          <div class="status closed">Closed: {{ metricsabsons.salesorders.closed }}</div>
+          <div class="status cancelled">Cancelled: {{ metricsabsons.salesorders.cancelled }}</div>
+        </div>
+        <ul>
+          <li *ngFor="let ranking of metricsabsons.salesorders.rankings">
+            {{ ranking.user }}: {{ (ranking.value / 1_000_000) | number:'1.0-2' }}M ({{ ranking.percentage }}%)
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Opportunities Section -->
+    <div class="section-card opportunities" (click)="toggleSection('opportunities')">
+      <div class="card-header">
+        <h3>📊 Opportunities (Total: {{ metricsabsons.opportunities.total / 1_000_000 | number:'1.0-2' }} M)</h3>
+      </div>
+      <div class="card-content" *ngIf="isExpanded['opportunities']">
+        <div class="status-container">
+          <div class="status open">Open: {{ metricsabsons.opportunities.open }}</div>
+          <div class="status closed">Closed: {{ metricsabsons.opportunities.closed }}</div>
+          <div class="status cancelled">Cancelled: {{ metricsabsons.opportunities.cancelled }}</div>
+        </div>
+        <ul>
+          <li *ngFor="let ranking of metricsabsons.opportunities.rankings">
+            Total Profit: {{ ranking.value }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Estimations Section -->
+    <div class="section-card estimations" (click)="toggleSection('estimations')">
+      <div class="card-header">
+        <h3>📈 Estimations (Total: {{ (metricsabsons.estimations.total / 1_000_000) | number:'1.0-2' }}M)</h3>
+      </div>
+      <div class="card-content" *ngIf="isExpanded['estimations']">
+        <div class="status-container">
+          <div class="status open">Open: {{ metricsabsons.estimations.open }}</div>
+          <div class="status closed">Closed: {{ metricsabsons.estimations.closed }}</div>
+          <div class="status cancelled">Cancelled: {{ metricsabsons.estimations.cancelled }}</div>
+        </div>
+        <ul>
+          <li *ngFor="let ranking of metricsabsons.estimations.rankings">
+            {{ ranking.user }}: {{ (ranking.value / 1_000_000) | number:'1.0-2' }}M ({{ ranking.percentage }}%)
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Purchase Orders Section -->
+    <div class="section-card purchase-orders" (click)="toggleSection('purchaseorders')">
+      <div class="card-header">
+        <h3>📈 Purchase Orders (Total: {{ (metricsabsons.purchaseorders.total / 1_000_000) | number:'1.0-2' }}M)</h3>
+      </div>
+      <div class="card-content" *ngIf="isExpanded['purchaseorders']">
+        <div class="status-container">
+          <div class="status open">Open: {{ metricsabsons.purchaseorders.open }}</div>
+          <div class="status closed">Closed: {{ metricsabsons.purchaseorders.closed }}</div>
+          <div class="status cancelled">Cancelled: {{ metricsabsons.purchaseorders.cancelled }}</div>
+        </div>
+        <ul>
+          <li *ngFor="let ranking of metricsabsons.purchaseorders.rankings">
+            {{ ranking.user }}: {{ (ranking.value / 1_000_000) | number:'1.0-2' }}M ({{ ranking.percentage }}%)
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Sales Invoices Section -->
+    <div class="section-card sales-invoices" (click)="toggleSection('salesinvoices')">
+      <div class="card-header">
+        <h3>💼 Sales Invoices (Total: {{ metricsabsons.salesinvoices.total / 1_000_000 | number:'1.0-2' }} M)</h3>
+      </div>
+      <div class="card-content" *ngIf="isExpanded['salesinvoices']">
+        <div class="status-container">
+          <div class="status open">Open: {{ metricsabsons.salesinvoices.open }}</div>
+          <div class="status closed">Closed: {{ metricsabsons.salesinvoices.closed }}</div>
+          <div class="status cancelled">Cancelled: {{ metricsabsons.salesinvoices.cancelled }}</div>
+        </div>
+        <ul>
+          <li *ngFor="let ranking of metricsabsons.salesinvoices.rankings">
+            {{ ranking.user }}: {{ (ranking.value / 1_000_000) | number:'1.0-2' }}M ({{ ranking.percentage }}%)
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- User Totals Section -->
+  <div class="user-totals-section">
+    <div class="section-card user-totals" (click)="toggleSection('userTotals')">
+      <div class="card-header">
+        <h3>User Totals</h3>
+      </div>
+      <div class="card-content" *ngIf="isExpanded['userTotals']">
+        <div class="user-boxes">
+          <div class="user-box" *ngFor="let user of metricsabsons.userTotals | keyvalue">
+            <strong>{{ user.key }}</strong>
+            <ul>
+              <li *ngIf="user.value.estimations > 0">Estimations: {{ user.value.estimations }}</li>
+              <li *ngIf="user.value.salesorders > 0">Sales Orders: {{ user.value.salesorders }}</li>
+              <li *ngIf="user.value.deliveryorders > 0">Delivery Orders: {{ user.value.deliveryorders }}</li>
+              <li *ngIf="user.value.purchaseorders > 0">Purchase Orders: {{ user.value.purchaseorders }}</li>
+              <li *ngIf="user.value.salesinvoices > 0">Sales Invoices: {{ user.value.salesinvoices }}</li>
+              <li *ngIf="user.value.goodsreceivednotes > 0">GRN: {{ user.value.goodsreceivednotes }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<div class="dashboard-container" [ngClass]="{'dark-mode': isDarkMode}">
+  <!-- Top Row: Approval Logs and Live Logs -->
+  <div class="top-row">
+    <!-- Approval Log -->
+  <div class="log-box approval-log" [ngClass]="{'dark-mode': isDarkMode}">
+    <a [routerLink]="['/approval-logs']">
+      <span class="message">{{ latestApprovalLog }}</span>
+    </a>
+    <app-approval-logs (latestApprovalLogEvent)="receiveLatestApprovalLog($event)"></app-approval-logs>
+  </div>
+
+    <!-- Live Log (Text Only) -->
+    <div class="log-box live-log" [ngClass]="{'dark-mode': isDarkMode}">
+      <a [routerLink]="['/live-logs']">
+        <span class="message">{{ latestLiveLog }}</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ✅ Move Full Live Logs Component Below -->
+  <app-live-logs (latestLogEvent)="receiveLatestLog($event)" hidden></app-live-logs>
+
+  <!-- Main Content Grid -->
+  <div class="grid-container">
+    <div class="sales-purchase">
+      <app-forecast [chartType]="'salesPurchaseChart'"></app-forecast>
+    </div>
+
+    <!-- Middle: Logs Component -->
+    <div class="logs">
+      <app-logs></app-logs>
+    </div>
+  </div>
+</div>

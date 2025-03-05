@@ -1,0 +1,151 @@
+/* General Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Body and Theme */
+body {
+  background-color: #ffffff;
+  color: #000000;
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &.dark-mode {
+    background-color: #000000;
+    color: #e0e0e0;
+  }
+}
+
+/* Dashboard Container */
+.dashboard-container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow: hidden;
+  background-color: #ffffff;
+  color: #000000;
+
+  &.dark-mode {
+    background-color: #000000;
+    color: #e0e0e0;
+  }
+}
+
+/* Top Row: Approval Logs and Live Logs */
+.top-row {
+  display: flex;
+  gap: 10px;
+
+  .log-box {
+    flex: 1;
+    height: 40px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.4); // Translucent background
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .message {
+      display: inline-block;
+      white-space: nowrap;
+      animation: moveTicker 30s linear infinite;
+      animation-delay: 0ms;
+      font-weight: bold;
+      color: #8a7cf3;
+      text-shadow: 0 0 2px #8a7cf3, 0 0 2px #c7c0ff;
+    }
+
+    &.dark-mode {
+      background-color: rgba(0, 0, 0, 0.8); // Dark translucent background
+      color: #e0e0e0;
+
+      .message {
+        color: #ffcd61;
+        text-shadow: 0 0 2px #ffd561, 0 0 2px #fcff61;
+      }
+    }
+
+    &.live-log {
+      background-color: rgba(144, 238, 144, 0.8); // Light green background
+
+      &.dark-mode {
+        background-color: rgba(35, 126, 35, 0.8); // Dark green background
+      }
+    }
+
+    &.approval-log {
+      background-color: rgba(173, 216, 230, 0.8); // Light blue background
+
+      &.dark-mode {
+        background-color: rgba(59, 59, 185, 0.8); // Dark blue background
+      }
+    }
+  }
+}
+
+/* Ticker Animation */
+@keyframes moveTicker {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* Main Content Grid */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; // Two equal columns
+  gap: 20px;
+
+  @media (max-width: 800px) {
+    grid-template-columns: 1fr; // Single column on smaller screens
+  }
+}
+
+/* Sales Purchase Chart */
+.sales-purchase {
+  border-radius: 8px;
+  padding: 20px;
+
+  &.dark-mode {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+  }
+}
+
+/* Logs Component */
+.logs {
+  border-radius: 8px;
+  padding: 20px;
+
+  &.dark-mode {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+  }
+}
+app-live-logs {
+  display: none;
+}
+app-approval-logs {
+  display: none;
+}

@@ -1,0 +1,53 @@
+<div class="job-card-container">
+  <div class="search-container">
+    <input type="text" [(ngModel)]="searchQuery" (input)="filteredSalesOrders()" placeholder="Search SalesOrderCode">
+    <button (click)="exportToExcel()">Download Excel</button>
+
+    <div *ngIf="filteredSalesOrders().length > 0" class="salesorder-suggestions">
+      <ul>
+        <li *ngFor="let code of filteredSalesOrders()" (click)="toggleSalesOrderSelection(code)">
+          {{ code }}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div *ngIf="selectedSalesOrders.length > 0" class="selected-sales-orders">
+    <h3>Selected Sales Orders</h3>
+    <ul>
+      <li *ngFor="let order of selectedSalesOrders">
+        {{ order }} <button class="remove-btn" (click)="removeSalesOrder(order)">x&nbsp;</button>
+      </li>
+    </ul>
+    <p>Total Selected: {{ selectedSalesOrders.length }}</p>
+  </div>
+
+  <h2>Select Fields to Export</h2>
+  <div class="field-list">
+    <ng-container *ngFor="let field of allFields">
+      <div *ngIf="isParentField(field) && (field === 'accountDetailsTable' || field === 'projectAccounts')" class="field-group">
+        <h3>{{ field }}</h3>
+        <ng-container *ngIf="field === 'accountDetailsTable'">
+          <h4>totalCalculation</h4>
+          <ul>
+            <li *ngFor="let subField of getSubFields('accountDetailsTable.totalCalculation')">
+              <label>
+                <input type="checkbox" [value]="subField" (change)="toggleFieldSelection(subField)">
+                {{ subField.split('.').slice(-1)[0] }}
+              </label>
+            </li>
+          </ul>
+        </ng-container>
+        <ul *ngIf="field === 'projectAccounts'">
+          <li *ngFor="let subField of getSubFields(field)">
+            <label>
+              <input type="checkbox" [value]="subField" (change)="toggleFieldSelection(subField)">
+              {{ subField.split('.').slice(-1)[0] }}
+            </label>
+          </li>
+        </ul>
+      </div>
+    </ng-container>
+  </div>
+
+</div>

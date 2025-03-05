@@ -1,0 +1,86 @@
+/* Define variables for colors */
+:root {
+  --primary-color: #000000;
+  --secondary-color: #000000;
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --dark-mode-background-color: #000000;
+  --dark-mode-text-color: #fff;
+}
+
+.header {
+  display: flex;
+  justify-content: center; /* Center the header */
+  align-items: center;
+  padding: 1rem 2rem;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Ensure the header is on top of other elements */
+  border:none;
+
+}
+
+/* Dark mode styles */
+.dark-mode .header {
+  background-color: var(--dark-mode-background-color);
+  color: var(--dark-mode-text-color);
+  border:none;
+}
+
+/* Branding styles */
+.branding {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+  border:none;
+}
+
+.branding i {
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+  border:none;
+}
+
+.branding h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+  border:none;
+}
+
+/* Actions styles */
+.actions {
+  display: flex;
+  align-items:center;
+  border:none;
+}
+
+.dark-mode-toggle {
+  background-color: transparent;
+  border: none;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #d4af37; /* Default color */
+}
+
+.dark-mode-toggle i {
+  transition: transform 0.3s ease-in-out;
+}
+
+.dark-mode-toggle .fa-moon {
+  transform: rotate(0deg);
+}
+
+.dark-mode-toggle .fa-sun {
+  transform: rotate(180deg);
+}
+
+body.dark-mode .dark-mode-toggle {
+  color: #ffffff; /* White color in dark mode */
+}

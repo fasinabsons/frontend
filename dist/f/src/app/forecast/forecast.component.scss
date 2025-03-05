@@ -1,0 +1,98 @@
+/* Light Mode Styles */
+.forecast-container {
+  display: grid;
+  grid-template-rows: auto auto; /* Two rows */
+  gap: 5px;
+  max-width: 1000px;
+  margin: 20px auto;
+  margin-top: 20px;
+  border:none;
+  padding:0px 0px 0px 0px;
+
+  .controls {
+    grid-column: 1 / -1; /* Span across all columns */
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    border:none;
+
+    .view-selector {
+      display: flex;
+      gap: 5px;
+
+      button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 24px;
+        background-color: #4a90e2; /* Dark Navy Blue */
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: #357abd; /* Slightly darker navy blue */
+        }
+
+        &.active {
+          background-color: #ff6f61; /* Peach */
+        }
+      }
+    }
+  }
+
+  .chart-row {
+    display: flex;
+    gap: 5px;
+    justify-content: space-between;
+
+    .chart-container {
+      flex: 1;
+      min-width: 300px;
+      padding: 20px;
+      border-radius: 12px;
+
+
+      canvas {
+        width: 70%;
+        height: 200px;
+        max-width: 100%;
+        max-height: 400px;
+      }
+    }
+  }
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+  .forecast-container {
+
+    .controls {
+      .view-selector {
+        button {
+          background-color: #6c5ce7; /* Lavender */
+          color: white;
+
+          &:hover {
+            background-color: #5a4dbf; /* Slightly darker lavender */
+          }
+
+          &.active {
+            background-color: #ff9f43; /* Pistachio (orange tone) */
+          }
+        }
+      }
+    }
+
+    .chart-row {
+      .chart-container {
+        background-color: #19274e; /* Dark navy blue */
+        box-shadow: 0 2px 6px rgba(255, 255, 255, 0.1);
+
+        canvas {
+          background-color: transparent;
+        }
+      }
+    }
+  }
+}

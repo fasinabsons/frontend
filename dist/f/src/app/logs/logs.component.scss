@@ -1,0 +1,203 @@
+// Base Variables
+$primary-color: #2c3e50; // Dark blue for headers and accents
+$secondary-color: #34495e; // Slightly lighter blue for backgrounds
+$text-color: #ecf0f1; // Light gray for text
+$accent-color: #3498db; // Bright blue for highlights
+$success-color: #27ae60; // Green for positive indicators
+$warning-color: #f1c40f; // Yellow for warnings
+$error-color: #e74c3c; // Red for errors
+$background-color: #ffffff; // Dark background for the dashboard
+$translucent-background: rgba($background-color, 0.9);
+$gradient-overlay: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+
+// Section-specific colors
+$delivery-orders-color: #8e44ad; // Purple for Delivery Orders
+$sales-orders-color: #2980b9; // Blue for Sales Orders
+$opportunities-color: #16a085; // Teal for Opportunities
+$estimations-color: #d35400; // Orange for Estimations
+$purchase-orders-color: #c0392b; // Red for Purchase Orders
+$sales-invoices-color: #f39c12; // Yellow for Sales Invoices
+$user-totals-color: #303333; // Gray for User Totals
+
+// Mixins for reusable styles
+@mixin card-styles($bg-color, $text-color: $text-color) {
+  background: $bg-color;
+  color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  }
+  &.dark-mode {
+    background: $bg-color;
+    color: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(255, 255, 255, 0.3);
+    }
+  }
+}
+
+@mixin status-styles($bg-color, $text-color: $text-color) {
+  background:rgba($bg-color, 0.5);
+  color: $text-color;
+  padding: 4px 8px;
+  gap:2px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  margin-right: 8px;
+}
+
+// Base Styles
+.logs-container {
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+  color: white;
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  .section-card {
+    @include card-styles($secondary-color);
+    padding: 16px;
+    cursor: pointer;
+
+    .card-header {
+      h3 {
+        margin: 0;
+        font-size: 1.2em;
+        color: $text-color;
+      }
+    }
+
+    .card-content {
+      margin-top: 12px;
+
+      .status-container {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+
+        .status {
+          &.open { @include status-styles($success-color); }
+          &.closed { @include status-styles($accent-color); }
+          &.cancelled { @include status-styles($error-color); }
+        }
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          padding: 8px 0;
+          border-bottom: 1px solid rgba($text-color, 0.1);
+
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+      }
+    }
+  }
+
+  // Section-specific styles
+  .delivery-orders {
+    @include card-styles($delivery-orders-color);
+
+    .card-header h3 {
+      color: lighten($delivery-orders-color, 50%);
+    }
+  }
+
+  .sales-orders {
+    @include card-styles($sales-orders-color);
+
+    .card-header h3 {
+      color: lighten($sales-orders-color, 50%);
+    }
+  }
+
+  .opportunities {
+    @include card-styles($opportunities-color);
+
+    .card-header h3 {
+      color: lighten($opportunities-color, 50%);
+    }
+  }
+
+  .estimations {
+    @include card-styles($estimations-color);
+
+    .card-header h3 {
+      color: lighten($estimations-color, 50%);
+    }
+  }
+
+  .purchase-orders {
+    @include card-styles($purchase-orders-color);
+
+    .card-header h3 {
+      color: lighten($purchase-orders-color, 50%);
+    }
+  }
+
+  .sales-invoices {
+    @include card-styles($sales-invoices-color);
+
+    .card-header h3 {
+      color: lighten($sales-invoices-color, 50%);
+    }
+  }
+
+  .user-totals-section {
+    .user-totals {
+      @include card-styles($user-totals-color);
+
+      .card-header h3 {
+        color: #d4af37;
+      }
+
+      .user-boxes {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 12px;
+
+        .user-box {
+          background-color: rgba($text-color, 0.1);
+          padding: 12px;
+          border-radius: 4px;
+
+          strong {
+            display: block;
+            margin-bottom: 8px;
+            color: #d4af37;
+          }
+
+          ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+
+            li {
+              padding: 4px 0;
+              font-size: 0.9em;
+            }
+          }
+        }
+      }
+    }
+  }
+}
